@@ -1,50 +1,92 @@
-# -Smart_Attrition_Prediction_Module_3
-Project Overview
-A brief explanation of the problem you are solving, objectives, and methods used.
+# Module 3: Attrition Prediction Model 🚀
 
-Key Features
-Employee Attrition Prediction using machine learning.
+This module focuses on building a robust and interpretable machine learning model to **predict employee attrition** risk and identify key factors driving it. The work forms part of the larger project: **Smart Attrition Prediction & Employee Wellness Recommendation Engine**.
 
-Attrition Risk Forecasting with high precision and recall.
+---
 
-Business insights on the factors driving attrition.
+## 📌 Objective
 
-Model interpretability through SHAP values and feature importance.
+- Predict whether an employee is at risk of leaving the organization.
+- Minimize false alarms (High Precision) while identifying as many at-risk employees as possible (High Recall).
+- Interpret model predictions using explainable AI tools.
 
-Installation Instructions
-Step 1: Clone the repository
+---
 
-bash
-Copy code
-git clone https://github.com/yourusername/Smart_Attrition_Prediction.git
-cd Smart_Attrition_Prediction
-Step 2: Install the dependencies
+## 📊 Dataset Overview
 
-bash
-Copy code
-pip install -r requirements.txt
-File Descriptions
-/data/: Contains the raw and cleaned dataset files.
+- Source: HR dataset with 1000+ employees (from Module 2).
+- Key features include: `Age`, `JobSatisfaction`, `OverTime`, `MonthlyIncome`, `YearsAtCompany`, `SatisfactionIndex`, `WorkBalanceScore`, etc.
+- Target variable: `Attrition` (0 = No, 1 = Yes)
 
-/notebooks/: Jupyter notebooks for each step in the project (EDA, Feature Selection, Model Training, etc.)
+---
 
-/outputs/: Contains output files such as performance tables, plots, and SHAP explanations.
+## 🧠 Algorithms Used
 
-Usage
-Step 1: Run the Jupyter Notebooks:
+| Model               | Notes                                      |
+|--------------------|--------------------------------------------|
+| Logistic Regression | Baseline, interpretable                   |
+| Random Forest       | Handles non-linearity, built-in feature importance |
+| XGBoost             | Great for imbalanced data, performance-optimized |
 
-01_EDA.ipynb: Perform exploratory data analysis.
+---
 
-02_feature_selection.ipynb: Feature selection and multicollinearity check.
+## 📌 Handling Class Imbalance
 
-03_model_training.ipynb: Train the models (Logistic Regression, Random Forest, XGBoost).
+- Initial Class Distribution:
+  - Class 0 (No Attrition): 986
+  - Class 1 (Attrition): 190
 
-04_tuning.ipynb: Tune the hyperparameters and apply SMOTE.
+- Techniques Used:
+  - **SMOTE** for oversampling the minority class
+  - **Class weights** added to logistic regression
+  - **Stratified K-Fold CV** for balanced evaluation
 
-05_interpretability.ipynb: Explain model predictions using SHAP and analyze feature importance.
+---
 
-06_final_report.ipynb: Generate the business insights report for key attrition drivers.
+## 🔍 Model Performance (Post-SMOTE)
 
-Step 2: Analyze results:
+| Model              | Precision (Class 1) | Recall (Class 1) | F1 Score (Class 1) | Accuracy |
+|-------------------|---------------------|------------------|--------------------|----------|
+| Logistic Regression | 0.33                | 0.72             | 0.46               | 72%      |
+| Random Forest       | 0.49                | 0.45             | 0.47               | 84%      |
+| XGBoost             | 0.50                | 0.43             | 0.46               | 84%      |
 
-Check /outputs/ for performance comparison tables, plots, and reports.
+✅ Best performance: **Random Forest** (balanced precision and recall)
+
+---
+
+## 🔎 Key Features Driving Attrition
+
+### 🎯 Random Forest Top 3 Features:
+- `YearsAtCompany`
+- `Age`
+- `MonthlyIncome`
+
+### 🎯 XGBoost Top 3 Features:
+- `OverTime_Yes`
+- `SatisfactionIndex`
+- `YearsAtCompany`
+
+---
+
+## 🧠 Explainability with SHAP
+
+- SHAP (SHapley Additive exPlanations) was used for **model interpretability**.
+- Visualized how individual features like `OverTime`, `SatisfactionIndex`, and `YearsAtCompany` influenced predictions.
+
+📎 See SHAP visual outputs in [`/outputs/shap_values`](./outputs/shap_values/)
+
+---
+
+## 📈 Visual Snapshots
+
+- ✅ Confusion matrices
+- ✅ Feature importance bar plots
+- ✅ SHAP summary plots
+
+📎 All visuals are stored in [`/outputs/`](./outputs/)
+
+---
+
+## 📁 Repository Structure
+
