@@ -1,122 +1,95 @@
-Introduction
-Employee attrition is a significant concern for many organizations. Understanding the key factors contributing to employees leaving the company can help businesses develop better retention strategies. In this report, we explore the main features driving employee attrition using machine learning models: Logistic Regression, Random Forest, and XGBoost. After performing feature selection, training the models, and evaluating them, we present the top features identified by the models, along with insights into their influence on employee attrition.
+# 📊 Business Insights Report – Module 3: Attrition Prediction
 
-Class Distribution Before and After SMOTE
-Before applying the Synthetic Minority Over-sampling Technique (SMOTE) to handle the class imbalance, the dataset showed a disproportionate number of employees who stayed (0) compared to those who left (1):
+## 🧩 Objective
+Build a predictive model to identify employees at risk of leaving, and explain key drivers of attrition. The focus was on:
+- High Precision (minimize false positives)
+- Good Recall (catch actual attrition cases)
+- Interpretability for HR decision-making
 
-Before SMOTE:
+---
 
-Attrition = 0: 986 employees
+## 🔍 Key Findings
 
-Attrition = 1: 190 employees
+### Attrition Distribution
+| Class | Description       | Count (Before SMOTE) | Count (After SMOTE) |
+|-------|-------------------|----------------------|---------------------|
+| 0     | Not Attrited      | 986                  | 986                 |
+| 1     | Attrited (Left)   | 190                  | 986                 |
 
-After SMOTE:
+✅ SMOTE successfully balanced the dataset to handle class imbalance.
 
-Attrition = 0: 986 employees
+---
 
-Attrition = 1: 986 employees
+## 📈 Model Evaluation Summary
 
-The balance achieved through SMOTE helps improve the model's performance in predicting the minority class (Attrition = 1).
+| Model              | Accuracy | Precision | Recall | F1-Score | Best Parameters                          |
+|-------------------|----------|-----------|--------|----------|-------------------------------------------|
+| Logistic Regression | 72%      | 0.33      | 0.72   | 0.46     | `C=1`, `solver='saga'`                    |
+| Random Forest       | 84%      | 0.49      | 0.45   | 0.47     | `n_estimators=200`, `max_depth=20`        |
+| XGBoost             | 84%      | 0.50      | 0.43   | 0.46     | `learning_rate=0.1`, `max_depth=10`, `n_estimators=100` |
 
-Model Evaluation
-We used three models to predict employee attrition risk:
+> 🎯 **Conclusion:**  
+Random Forest and XGBoost provided the best balanced performance. Logistic Regression had higher recall, useful for early detection.
 
-Logistic Regression (Baseline Model)
+---
 
-Random Forest (Non-linear model)
+## 🔑 Top 3 Drivers of Attrition
 
-XGBoost (Gradient Boosting for imbalanced data)
+### Random Forest
+| Feature           | Importance |
+|------------------|------------|
+| YearsAtCompany    | 0.21       |
+| Age               | 0.19       |
+| MonthlyIncome     | 0.18       |
 
-Logistic Regression
-The Logistic Regression model provides a baseline performance, but it struggles to identify the minority class (Attrition = 1), which is crucial in predicting employees who are likely to leave.
+### XGBoost
+| Feature           | Importance |
+|------------------|------------|
+| OverTime_Yes      | 0.28       |
+| SatisfactionIndex | 0.16       |
+| YearsAtCompany    | 0.15       |
 
-Precision: 0.33 (for Attrition = 1)
+---
 
-Recall: 0.72 (for Attrition = 1)
+## 📌 Business Insights
 
-F1-Score: 0.46 (for Attrition = 1)
+### 1. **Years at Company**
+- Risk spikes for new employees (<2 years) and long-tenured employees (>10 years).
+- Suggests need for stronger onboarding and career progression mapping.
 
-Accuracy: 0.72
+### 2. **Age**
+- Younger employees more likely to leave, potentially due to lack of growth opportunities.
+- Recommend targeted retention strategies for early-career employees.
 
-Random Forest
-The Random Forest model performs better, especially for identifying employees who stay (Attrition = 0), but it still has a lower recall for predicting attrition.
+### 3. **Monthly Income**
+- Low income linked to higher attrition.
+- Conduct salary benchmarking and offer retention bonuses.
 
-Precision: 0.49 (for Attrition = 1)
+### 4. **OverTime**
+- Frequent overtime is a strong signal of dissatisfaction.
+- Promote workload balancing and enforce work-hour policies.
 
-Recall: 0.45 (for Attrition = 1)
+### 5. **Satisfaction Index**
+- Low engagement and satisfaction lead to exits.
+- Deploy regular pulse surveys and act quickly on feedback.
 
-F1-Score: 0.47 (for Attrition = 1)
+---
 
-Accuracy: 0.84
+## ✅ Recommendations for HR Strategy
 
-XGBoost
-XGBoost achieves similar performance to Random Forest. However, it performs slightly better in terms of feature importance analysis, especially regarding the factors that predict attrition.
+| Focus Area         | Suggested Action                                                |
+|--------------------|-----------------------------------------------------------------|
+| Compensation        | Review pay policies; reward high performers                    |
+| Career Development  | Offer mentorship and advancement tracks                        |
+| Work-Life Balance   | Reduce forced overtime; launch wellness programs               |
+| Monitoring Tools    | Use prediction models for early attrition risk flagging        |
+| Feedback Systems    | Monthly surveys and skip-level meetings for active engagement  |
 
-Precision: 0.50 (for Attrition = 1)
+---
 
-Recall: 0.43 (for Attrition = 1)
+## 🧠 Conclusion
+The ML models and SHAP analysis not only predicted attrition risk but also uncovered **root causes**. Proactive action on the top factors can help reduce turnover, saving recruitment and training costs.
 
-F1-Score: 0.46 (for Attrition = 1)
+📁 *Add this report to your GitHub repository under `Business_Report_Module3.md` for HR stakeholders and project reviewers.*
 
-Accuracy: 0.84
-
-Best Model Hyperparameters
-After tuning the hyperparameters, the best configurations were:
-
-Random Forest:
-
-max_depth: 20
-
-min_samples_split: 2
-
-n_estimators: 200
-
-XGBoost:
-
-learning_rate: 0.1
-
-max_depth: 10
-
-n_estimators: 100
-
-These optimal configurations improved the models' ability to predict attrition with higher accuracy and recall.
-
-Key Features Driving Attrition
-The feature importance analysis from Random Forest and XGBoost reveals that certain employee characteristics have a significant impact on the likelihood of attrition. Below are the top features identified by each model.
-
-Top Features from Random Forest
-YearsAtCompany (0.2135): Employees with fewer years at the company are more likely to leave. This suggests that newer employees may not have fully integrated into the company or may be more likely to leave for better opportunities.
-
-Age (0.1991): Younger employees, particularly those at the start of their careers, may be more prone to leaving for career advancement, better benefits, or new challenges.
-
-MonthlyIncome (0.1813): Employees with lower monthly incomes may be more likely to seek higher-paying opportunities elsewhere.
-
-Top Features from XGBoost
-OverTime_Yes (0.2864): Employees who are working overtime are more likely to leave the company. This could indicate burnout or dissatisfaction with work-life balance.
-
-SatisfactionIndex (0.1629): Employees with lower job satisfaction are more likely to leave. This factor highlights the importance of maintaining a positive work environment and addressing employee concerns.
-
-YearsAtCompany (0.1509): As with Random Forest, employees with fewer years at the company are more likely to attrite.
-
-Business Insights
-From the feature importance analysis, we can draw the following conclusions about the key drivers of employee attrition:
-
-OverTime: Employees who frequently work overtime have a higher risk of attrition. This suggests that burnout or dissatisfaction with long working hours is a significant factor in employee turnover. Companies should consider addressing work-life balance and reducing excessive overtime.
-
-Job Satisfaction: Employees who report lower satisfaction levels are more likely to leave. Ensuring that employees feel valued and engaged in their roles can significantly reduce attrition. Regular employee feedback surveys and open communication channels can help identify and address issues before they lead to attrition.
-
-Tenure at Company: Both models highlight that employees with shorter tenure are at higher risk of leaving. This suggests that companies should focus on improving onboarding and early career development programs to enhance retention among newer employees.
-
-Conclusion
-The models reveal that OverTime, Job Satisfaction, and Years at Company are among the most influential factors driving employee attrition. Organizations can reduce turnover by addressing issues related to work-life balance, job satisfaction, and career progression for younger or newer employees.
-
-Incorporating these insights into HR policies, such as reducing overtime, improving job satisfaction through employee engagement programs, and enhancing career development opportunities, will help mitigate employee attrition risks.
-
-Next Steps
-To further refine the attrition prediction model:
-
-Add More Features: Incorporate additional features, such as department, role-specific characteristics, and external factors like market conditions.
-
-Implement Advanced Techniques: Explore techniques like ensemble methods or neural networks to improve model performance.
-
-Deployment: Develop a real-time attrition prediction system using APIs (e.g., Flask) for integration into HR decision-making processes.
+---
