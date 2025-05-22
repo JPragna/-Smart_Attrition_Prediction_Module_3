@@ -41,7 +41,8 @@ To predict employee attrition risk using ML models and extract interpretable bus
 ![shap-summary](outputs/picture.png)
 
 ## 📄 Business Insights
-> See the report](reports/Attrition_Insights_Report.pdf)
+📄 [View Business Report](Business_Report_Module3.md)
+
 
 ## 🧰 Setup
 ```bash
