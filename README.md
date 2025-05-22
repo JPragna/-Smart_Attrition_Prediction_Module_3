@@ -38,10 +38,10 @@ To predict employee attrition risk using ML models and extract interpretable bus
 
 ## 📈 SHAP Values
 > Visuals show how each feature contributes to individual predictions.
-![shap-summary](outputs/shap_values/shap_summary_plot.png)
+![shap-summary](outputs/picture.png)
 
 ## 📄 Business Insights
-> See the [2-page PDF report](reports/Attrition_Insights_Report.pdf)
+> See the report](reports/Attrition_Insights_Report.pdf)
 
 ## 🧰 Setup
 ```bash
