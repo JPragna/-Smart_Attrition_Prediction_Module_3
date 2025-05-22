@@ -1,0 +1,6 @@
+Employee_Feedback,Sentiment_Polarity,Wellness_Category
+I feel overwhelmed with the workload. Need better support from management.,0.5,Thriving
+The work-life balance is great here. I love the team culture.,0.65,Thriving
+It's a toxic culture. I can't wait to leave.,0.0,Stable
+The management is supportive and helps with career growth.,0.5,Thriving
+Workload is too much. The team dynamics are not good.,-0.1,Thriving
