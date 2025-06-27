@@ -26,28 +26,29 @@ We apply classification techniques with resampling, hyperparameter tuning, and e
 * **Visualization**: Matplotlib, Seaborn
 
 ---
+## 🚀 Features
 
+- 🔄 **Handles class imbalance** using SMOTE and weighted models
+- 📊 **Models used**: Logistic Regression, Random Forest, XGBoost
+- 📈 **Evaluation**: Confusion matrix, ROC-AUC, Precision, Recall
+- 🧠 **Explainability**: SHAP used to understand feature importance
+- 🎯 **Best Accuracy Achieved**: ~84% (XGBoost)
+
+---
 ## 📁 Project Structure
 
 ```
 Smart_Attrition_Prediction_Module_3/
-├── data/
-│   └── M3_Cleaned_Final.csv
 ├── notebooks/
-│   └── Attrition_Model_Development.ipynb
-├── reports/
-│   ├── Model_Performance_Report.md
-│   └── Business_Insights_Report.md
+│ └── Attrition_Model_Development.ipynb
+├── data/
+│ └── M3_Cleaned_Final.csv
+├── models/
+│ └── xgb_model.pkl
+├── predict.py
+├── shap_plot.py (optional)
 ├── visuals/
-│   ├── shap_summary_plot.png
-│   ├── feature_importance_rf.png
-│   └── feature_importance_xgb.png
-├── model_evaluation_visual/
-│   ├── Logistic_Regression_Evaluation.png
-│   ├── Random_Forest_Evaluation.png
-│   └── XGBoost_Evaluation.png
-├── requirements.txt
-└── README.md
+├── README.md
 ```
 
 ---
@@ -143,6 +144,23 @@ Smart_Attrition_Prediction_Module_3/
    (Ensure Jupyter/Colab is set up)
 
 ---
+or 
+## 🛠️ How to Use
+
+### 1. 📊 Train the Model
+Run the notebook:
+notebooks/Attrition_Model_Development.ipynb
+
+This trains the models and outputs performance metrics + SHAP plots.
+
+### 2. 🔮 Make Predictions
+After training, run:
+python predict.py
+Ensure your new input data is placed in:
+
+bash
+Copy code
+data/new_employee_data.csv
 
 ## 📊 Model Evaluation
 
